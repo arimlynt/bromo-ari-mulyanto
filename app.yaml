@@ -1,12 +1,14 @@
-runtime: static_files
+runtime: python27
+api_version: 1
+threadsafe: true
 
 handlers:
 - url: /stylesheets
   static_dir: stylesheets
 
-- url: /image
-  static_dir: image
-
+- url: /images(.*\.(gif|png|jpg))
+  static_files: static/\1
+  upload: static/.*\.(gif|png|jpg)
+  
 - url: /.*
-  static_files: index.html
-  upload: index.html
+  script: index.html
